@@ -91,3 +91,33 @@ btnHold.addEventListener('click', function () {
     }
   }
 });
+
+btnNew.addEventListener('click', function () {
+  //Reset Scores = Current score, Scores[0,1],
+  currentScore = 0;
+  for (let i = 0; i < scores.length; i++) {
+    scores[i] = 0;
+    document.getElementById(`current--${i}`).textContent = scores[i];
+    document.getElementById(`score--${i}`).textContent = scores[i];
+  }
+
+  //Reset turn to player 1,
+  //If no winner
+  diceEl.classList.add('hidden');
+  if (activePlayer !== 0 && playing) {
+    switchPlayer();
+  }
+
+  //If there is winner
+  else if (!playing) {
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove('player--winner');
+    document.querySelector(`.player--0`).classList.add('player--active');
+
+    //Reset playing condition to enable buttons
+    playing = true;
+  }
+});
+
+//Jonas Schmedtmann Implementation - Reset Button
